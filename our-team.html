@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ThinkingAutomata — Faculty & Staff</title>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:          #f9f8f4;
+    --ink:         #1a1a1a;
+    --ink-dim:     #555555;
+    --accent:      #2d3e50;
+    --border:      rgba(0, 0, 0, 0.08);
+    --mono: 'JetBrains Mono', monospace;
+    --serif: 'Newsreader', serif;
+    --sans: 'Inter', sans-serif;
+  }
+
+  body {
+    background-color: var(--bg);
+    background-image: 
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 40px 40px;
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.7;
+  }
+
+  /* ── NAVIGATION ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 4rem;
+    background: rgba(249, 248, 244, 0.9);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--ink);
+  }
+
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 500;
+    font-style: italic;
+    text-decoration: none;
+    color: var(--ink);
+  }
+
+  nav ul { list-style: none; display: flex; gap: 3rem; }
+  .nav-link {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--ink-dim);
+  }
+  .nav-link:hover { color: var(--ink); }
+
+  /* ── HEADER ── */
+  .page-header {
+    padding: 8rem 4rem 4rem;
+    border-bottom: 1px solid var(--ink);
+  }
+
+  .technical-meta {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  h1 {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 6vw, 4.5rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  /* ── TEAM SECTIONS ── */
+  .section {
+    padding: 4rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-label {
+    font-family: var(--serif);
+    font-size: 2rem;
+    margin-bottom: 3rem;
+    font-style: italic;
+  }
+
+  /* ── ADVISOR BLOCK (Modified with Photo) ── */
+  .advisor-hero {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Custom grid for bio + photo */
+    gap: 4rem;
+    padding: 4rem;
+    background: #fff;
+    border: 1px solid var(--ink);
+    margin-bottom: 4rem;
+    align-items: start;
+  }
+
+  .advisor-info h2 {
+    font-family: var(--serif);
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .advisor-title {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    display: block;
+  }
+
+  .advisor-photo-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .advisor-photo-container {
+    width: 100%;
+    aspect-ratio: 4/5;
+    border: 1px solid var(--ink);
+    margin-bottom: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+  }
+
+  .advisor-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%); /* Maintain high-end academic look */
+  }
+
+  .advisor-meta {
+    writing-mode: vertical-rl;
+    border-left: 1px solid var(--ink);
+    padding-left: 1rem;
+    margin-bottom: 0;
+  }
+
+  /* ── STUDENT DIRECTORY ── */
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--ink);
+    border: 1px solid var(--ink);
+  }
+
+  .team-member {
+    background: var(--bg);
+    padding: 3rem;
+  }
+
+  /* New Photo Style for Student Team */
+  .team-photo-container {
+    width: 100%;
+    aspect-ratio: 1/1;
+    border: 1px solid var(--ink);
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+  }
+
+  .team-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+  }
+
+  .photo-annotation {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: var(--ink-dim);
+    text-transform: uppercase;
+    background: rgba(249, 248, 244, 0.8);
+    padding: 0.2rem 0.4rem;
+  }
+
+  .team-member h3 {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+    line-height: 1.2;
+  }
+
+  .role-tag {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    border: 1px solid var(--border);
+    padding: 0.2rem 0.5rem;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+  }
+
+  .bio {
+    font-size: 0.95rem;
+    color: var(--ink-dim);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 4rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    font-size: 0.8rem;
+    border-top: 2px solid var(--ink);
+  }
+
+  .footer-col h4 {
+    font-family: var(--mono);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 1024px) {
+    .team-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    .advisor-hero, .team-grid, footer { grid-template-columns: 1fr; }
+    nav { padding: 1rem 2rem; }
+    .page-header, .section { padding: 4rem 2rem; }
+    .advisor-photo-column { align-items: flex-start; margin-top: 2rem; }
+    .advisor-meta { writing-mode: horizontal-tb; border-left: none; padding-left: 0; border-top: 1px solid var(--ink); padding-top: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">ThinkingAutomata</a>
+  <ul>
+    <li><a href="index.html#methodology" class="nav-link">Methodology</a></li>
+    <li><a href="index.html#artifacts" class="nav-link">Artifacts</a></li>
+    <li><a href="#" class="nav-link">Faculty & Staff</a></li>
+  </ul>
+</nav>
+
+<header class="page-header">
+  <span class="technical-meta">Directory / personnel-list-2026</span>
+  <h1>Research Leadership<br>& Development.</h1>
+</header>
+
+<section class="section">
+  <div class="section-label">Faculty Supervision</div>
+  <div class="advisor-hero">
+    <div class="advisor-info">
+      <h2>Dr. Gerry Dozier</h2>
+      <span class="advisor-title">Advisor</span>
+      <p class="bio">Providing research guidance, technical oversight, and strategic direction. Dr. Dozier mentors the development team, combining expertise in AI and academic community-building to shape the platform's execution.</p>
+    </div>
+    <div class="advisor-photo-column">
+      <div class="advisor-photo-container">
+        <img src="./our-story/gd.png" alt="Dr. Gerry Dozier" class="advisor-photo">
+        <div class="photo-annotation">Official Portrait</div>
+      </div>
+      <span class="technical-meta advisor-meta">Auburn University / Computer Science</span>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-label">Student Development Team</div>
+  <div class="team-grid">
+    <div class="team-member">
+      <div class="team-photo-container">
+        <img src="./our-story/team1.png" alt="Jahidul Arafat" class="team-photo">
+        <div class="photo-annotation">Photo Pending</div>
+      </div>
+      <span class="technical-meta">ID: TA-STU-01</span>
+      <h3>Jahidul Arafat</h3>
+      <span class="role-tag">PhD Student · Computer Science</span>
+      <p class="bio">Part of the student team building AI-generated keynote speaker systems for colleges and universities nationwide.</p>
+    </div>
+    <div class="team-member">
+      <div class="team-photo-container">
+        <img src="./our-story/team2.png" alt="Bhuvan Bodakuntla" class="team-photo">
+        <div class="photo-annotation">Photo Pending</div>
+      </div>
+      <span class="technical-meta">ID: TA-STU-02</span>
+      <h3>Bhuvan Bodakuntla</h3>
+      <span class="role-tag">MS Student · Data Engineering</span>
+      <p class="bio">Contributing to the development of custom AI avatars and full-production keynote talks tailored to institutional voices.</p>
+    </div>
+    <div class="team-member">
+      <div class="team-photo-container">
+        <img src="./our-story/team3.png" alt="Sawyer Womack" class="team-photo">
+        <div class="photo-annotation">Photo Pending</div>
+      </div>
+      <span class="technical-meta">ID: TA-STU-03</span>
+      <h3>Sawyer Womack</h3>
+      <span class="role-tag">BS Student · Software Engineering</span>
+      <p class="bio">Passionate about Artificial Intelligence and Agentic AI, working to shape the future of knowledge communication.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-col">
+    <h4>ThinkingAutomata</h4>
+    <p>A student-led research initiative supervised by<br><strong>Dr. Gerry Dozier</strong></p>
+  </div>
+  <div class="footer-col">
+    <h4>Office</h4>
+    <p>Department of Computer Science<br>Auburn University</p>
+  </div>
+  <div class="footer-col">
+    <h4>Copyright</h4>
+    <p>© 2026 Institutional Rights Reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>
